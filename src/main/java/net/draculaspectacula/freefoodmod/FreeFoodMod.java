@@ -3,6 +3,7 @@ package net.draculaspectacula.freefoodmod;
 import com.mojang.logging.LogUtils;
 import net.draculaspectacula.freefoodmod.item.ModItems;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -32,7 +33,8 @@ public class FreeFoodMod {
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::addCreative); {
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -40,6 +42,9 @@ public class FreeFoodMod {
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.SAGEBRUSH_SHRUB);
+        }
 
     }
 
